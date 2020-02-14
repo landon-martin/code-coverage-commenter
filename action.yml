@@ -1,0 +1,16 @@
+name: "Code Coverage Commenter"
+description: "Comments on a PR with a formatted markdown table displaying the code coverage"
+author: "Landon Martin"
+branding:
+  icon: "message-square"
+  color: "blue"
+inputs:
+  token:
+    description: "GitHub Token"
+    required: true
+  coverage-command:
+    description: "Specify a command to run code coverage analysis"
+    required: false
+runs:
+  using: "node12"
+  main: "index.js"

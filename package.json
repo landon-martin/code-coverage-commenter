@@ -1,0 +1,21 @@
+{
+  "name": "code-coverage-commenter",
+  "version": "0.0.1",
+  "description": "Comments on a PR with a formatted markdown table displaying the code coverage",
+  "main": "index.js",
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "comment",
+    "message",
+    "actions",
+    "pull-request",
+    "jest"
+  ],
+  "author": "Landon Martin",
+  "dependencies": {
+    "@actions/core": "^1.2.2",
+    "@actions/github": "^1.1.0"
+  }
+}
