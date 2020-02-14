@@ -2,7 +2,8 @@
   "name": "code-coverage-commenter",
   "version": "0.0.2",
   "description": "Comments on a PR with a formatted markdown table displaying the code coverage",
-  "main": "index.js",
+  "main": "ccc.js",
+  "author": "Landon Martin",
   "repository": {
     "type": "git"
   },
@@ -13,9 +14,12 @@
     "pull-request",
     "jest"
   ],
-  "author": "Landon Martin",
+  "scripts": {
+    "test": "jest --silent"
+  },
   "dependencies": {
     "@actions/core": "^1.2.2",
-    "@actions/github": "^1.1.0"
+    "@actions/github": "^1.1.0",
+    "jest": "^25.1.0"
   }
 }
