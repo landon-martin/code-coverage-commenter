@@ -26,7 +26,7 @@ function getPrId(githubRef) {
 }
 
 function createComment(table) {
-  `<details><summary>Unit Test Coverage Report</summary>
+  return `<details><summary>Unit Test Coverage Report</summary>
 <br>
 
 ${table}
