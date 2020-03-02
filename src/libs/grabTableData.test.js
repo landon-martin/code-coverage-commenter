@@ -1,4 +1,4 @@
-const { grabTableData } = require('.')
+const grabTableData = require('./grabTableData')
 
 test('Removes any lines before table', () => {
   const output = `console.debug src/image_manager.js:785
