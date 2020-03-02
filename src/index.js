@@ -2,23 +2,7 @@ const core = require('@actions/core')
 const { execSync } = require('child_process')
 const { GitHub, context } = require('@actions/github')
 
-function isTableRow (line) {
-  return line && typeof line === 'string' ? line.match(/^[-|]*$/) && line !== '' : false
-}
-
-function grabTableData (output) {
-  let ccArray = output.split('\n')
-  // Remove empty lines and command outputs
-  let tableRowCount = 0
-  ccArray = ccArray.filter((line) => {
-    if (isTableRow(line)) {
-      tableRowCount++
-    }
-    return tableRowCount < 3 && tableRowCount > 0
-  })
-  ccArray = ccArray.slice(1, ccArray.length)
-  return ccArray.join('\n')
-}
+const grabTableData = require('./libs/grabTableData')
 
 function getPrId (githubRef) {
   const result = /refs\/pull\/(\d+)\/merge/g.exec(githubRef)
