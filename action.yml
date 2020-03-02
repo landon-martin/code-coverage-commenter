@@ -11,6 +11,9 @@ inputs:
   coverage-command:
     description: "Specify a command to run code coverage analysis"
     required: false
+  comment-title:
+    description: "The title of the comment on the PR"
+    required: false
 runs:
   using: "node12"
   main: "src/index.js"

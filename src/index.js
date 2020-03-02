@@ -11,8 +11,8 @@ function getPrId (githubRef) {
   return pullRequestId
 }
 
-function createComment (table) {
-  return `<details><summary>Unit Test Coverage Report</summary>
+function createComment (title, table) {
+  return `<details><summary>${title}</summary>
 <br>
 
 ${table}
@@ -26,6 +26,7 @@ const main = async () => {
   // Grab the action inputs
   const gitHubToken = core.getInput('token')
   const covCommand = core.getInput('coverage-command') || 'npm run test -- --coverage'
+  const title = core.getInput('comment-title') || 'Unit Test Coverage Report'
 
   const githubClient = new GitHub(gitHubToken)
 
@@ -34,7 +35,7 @@ const main = async () => {
   const fullReturn = execSync(covCommand).toString()
   const codeCoverageTable = grabTableData(fullReturn)
 
-  const commentBody = createComment(codeCoverageTable)
+  const commentBody = createComment(title, codeCoverageTable)
 
   await githubClient.issues.createComment({
     repo: repoName,
