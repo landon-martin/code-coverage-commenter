@@ -1,5 +1,5 @@
 const core = require('@actions/core')
-const { execSync } = require('child_process')
+const exec = require('@actions/exec')
 const { GitHub, context } = require('@actions/github')
 
 const grabTableData = require('./libs/grabTableData')
@@ -32,17 +32,34 @@ const main = async () => {
 
   const prNumber = getPrId(process.env.GITHUB_REF)
 
-  const fullReturn = execSync(covCommand).toString()
-  const codeCoverageTable = grabTableData(fullReturn)
+  let fullReturn = ''
 
-  const commentBody = createComment(title, codeCoverageTable)
+  const options = {}
+  options.listeners = {
+    stdout: (data) => {
+      fullReturn += data.toString()
+    },
+    stderr: (data) => {
+      fullReturn += data.toString()
+    }
+  }
+  await exec.exec(covCommand, options)
 
-  await githubClient.issues.createComment({
-    repo: repoName,
-    owner: repoOwner,
-    body: commentBody,
-    issue_number: prNumber
-  })
+  try {
+    const codeCoverageTable = grabTableData(fullReturn)
+
+    const commentBody = createComment(title, codeCoverageTable)
+
+    await githubClient.issues.createComment({
+      repo: repoName,
+      owner: repoOwner,
+      body: commentBody,
+      issue_number: prNumber
+    })
+  } catch (e) {
+    console.error('Failed to create comment on PR')
+    console.error(e)
+  }
 }
 
 main().catch(err => core.setFailed(err.message))
