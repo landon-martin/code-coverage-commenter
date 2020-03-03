@@ -27,6 +27,7 @@ const main = async () => {
   const gitHubToken = core.getInput('token')
   const covCommand = core.getInput('coverage-command') || 'npm run test -- --coverage'
   const title = core.getInput('comment-title') || 'Unit Test Coverage Report'
+  const workingDir = core.getInput('working-dir')
 
   const githubClient = new GitHub(gitHubToken)
 
@@ -41,6 +42,7 @@ const main = async () => {
       fullReturn += data.toString()
     }
   }
+  options.cwd = workingDir
   await exec.exec(covCommand, [], options)
 
   try {
