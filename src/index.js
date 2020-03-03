@@ -30,8 +30,6 @@ const main = async () => {
 
   const githubClient = new GitHub(gitHubToken)
 
-  const prNumber = getPrId(process.env.GITHUB_REF)
-
   let fullReturn = ''
 
   const options = {}
@@ -46,16 +44,20 @@ const main = async () => {
   await exec.exec(covCommand, options)
 
   try {
-    const codeCoverageTable = grabTableData(fullReturn)
+    if (process.env.GITHUB_REF) {
+      const prNumber = getPrId(process.env.GITHUB_REF)
+      const codeCoverageTable = grabTableData(fullReturn)
+      const commentBody = createComment(title, codeCoverageTable)
 
-    const commentBody = createComment(title, codeCoverageTable)
-
-    await githubClient.issues.createComment({
-      repo: repoName,
-      owner: repoOwner,
-      body: commentBody,
-      issue_number: prNumber
-    })
+      await githubClient.issues.createComment({
+        repo: repoName,
+        owner: repoOwner,
+        body: commentBody,
+        issue_number: prNumber
+      })
+    } else {
+      console.warn('GITHUB_REF not found, not commenting.')
+    }
   } catch (e) {
     console.error('Failed to create comment on PR')
     console.error(e)
