@@ -65,5 +65,3 @@ const main = async () => {
 }
 
 main().catch(err => core.setFailed(err.message))
-
-module.exports.grabTableData = grabTableData
