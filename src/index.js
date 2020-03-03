@@ -41,7 +41,7 @@ const main = async () => {
       fullReturn += data.toString()
     }
   }
-  await exec.exec(covCommand, options)
+  await exec.exec(covCommand, [], options)
 
   try {
     if (process.env.GITHUB_REF) {
