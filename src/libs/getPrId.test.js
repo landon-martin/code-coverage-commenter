@@ -1,3 +1,5 @@
+jest.mock('fs')
+
 const getPrId = require('./getPrId')
 
 test('Grab pr from GITHUB_EVENT_PATH', () => {
