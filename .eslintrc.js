@@ -12,6 +12,7 @@ module.exports = {
     SharedArrayBuffer: 'readonly',
     test: true,
     expect: true,
+    jest: true,
   },
   parserOptions: {
     ecmaVersion: 2018
