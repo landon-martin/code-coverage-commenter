@@ -1,10 +1,10 @@
 const core = require('@actions/core')
 
-const { GitHub, context } = require('@actions/github')
+const { context } = require('@actions/github')
 
 const grabTableData = require('./libs/grabTableData')
 const getPrId = require('./libs/getPrId')
-const createComment = require('./libs/createComment')
+const { createCommentOnPR, generateComment }= require('./libs/createComment')
 const runCoverageCommand = require('./libs/runCoverageCommand')
 
 const main = async () => {
@@ -17,16 +17,13 @@ const main = async () => {
   const title = core.getInput('comment-title') || 'Unit Test Coverage Report'
   const workingDir = core.getInput('working-dir')
 
-  const githubClient = new GitHub(gitHubToken)
-
   const fullReturn = await runCoverageCommand(covCommand, workingDir)
 
   try {
     const prNumber = getPrId()
     const codeCoverageTable = grabTableData(fullReturn)
-    const commentBody = createComment(title, codeCoverageTable)
-
-    await githubClient.issues.createComment({
+    const commentBody = generateComment(title, codeCoverageTable)
+    await createCommentOnPR(gitHubToken, {
       repo: repoName,
       owner: repoOwner,
       body: commentBody,
