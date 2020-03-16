@@ -25,3 +25,9 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           coverage-command: 'npm run test -- --coverage'
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./covergae/clover.xml
+          flags: unittests # optional
+          name: codecov-umbrella # optional
