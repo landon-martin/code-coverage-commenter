@@ -17,7 +17,6 @@ async function createCommentOnPR (token, comment) {
   const githubClient = new GitHub(token)
 
   await githubClient.issues.createComment(comment)
-  return comment.commentBody.length
 }
 
 module.exports = {
