@@ -12,6 +12,5 @@ module.exports = (output) => {
     }
     return tableRowCount < 3 && tableRowCount > 0
   })
-  ccArray = ccArray.slice(1, ccArray.length)
-  return ccArray.join('\n')
+  return ccArray.slice(1, ccArray.length)
 }
