@@ -1,6 +1,6 @@
 {
   "name": "code-coverage-commenter",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Comments on a PR with a formatted markdown table displaying the code coverage",
   "main": "ccc.js",
   "author": "Landon Martin",
