@@ -1,16 +1,12 @@
 const core = require('@actions/core')
-
-const { context } = require('@actions/github')
+const github = require('@actions/github')
 
 const grabTableData = require('./libs/grabTableData')
 const getPrId = require('./libs/getPrId')
-const { createCommentOnPR, generateComment } = require('./libs/createComment')
+const generateComment = require('./libs/generateComment')
 const runCoverageCommand = require('./libs/runCoverageCommand')
 
 const main = async () => {
-  // Setup the context
-  const repoName = context.repo.repo
-  const repoOwner = context.repo.owner
   // Grab the action inputs
   const gitHubToken = core.getInput('token')
   const covCommand = core.getInput('coverage-command') || 'npm run test -- --coverage'
@@ -23,9 +19,11 @@ const main = async () => {
     const prNumber = getPrId()
     const codeCoverageTable = grabTableData(fullReturn)
     const commentBody = generateComment(title, codeCoverageTable)
-    await createCommentOnPR(gitHubToken, {
-      repo: repoName,
-      owner: repoOwner,
+
+    const octokit = new github.GitHub(gitHubToken)
+
+    await octokit.issues.createComment({
+      ...github.context.repo,
       body: commentBody,
       issue_number: prNumber
     })
