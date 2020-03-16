@@ -4,7 +4,7 @@ const { context } = require('@actions/github')
 
 const grabTableData = require('./libs/grabTableData')
 const getPrId = require('./libs/getPrId')
-const { createCommentOnPR, generateComment }= require('./libs/createComment')
+const { createCommentOnPR, generateComment } = require('./libs/createComment')
 const runCoverageCommand = require('./libs/runCoverageCommand')
 
 const main = async () => {
