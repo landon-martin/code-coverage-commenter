@@ -1,6 +1,6 @@
 const exec = require('@actions/exec')
 
-module.exports = async (command, workingDir) => {
+module.exports = async (command, workingDir = '.') => {
   let fullReturn = ''
 
   const options = {}
