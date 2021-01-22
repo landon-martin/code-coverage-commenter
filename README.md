@@ -32,12 +32,12 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: 10.x
+          node-version: 14.x
       - name: npm install
         run: |
           npm install
       - name: Run Jest Tests
-        uses: landon-martin/code-coverage-commenter@v0.0.8
+        uses: landon-martin/code-coverage-commenter@v0.0.9
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           coverage-command: "npm run test -- --coverage"
