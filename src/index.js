@@ -20,7 +20,7 @@ const main = async () => {
     const codeCoverageTable = grabTableData(fullReturn)
     const commentBody = generateComment(title, codeCoverageTable)
 
-    const octokit = new github.GitHub(gitHubToken)
+    const octokit = github.getOctokit(gitHubToken)
 
     await octokit.issues.createComment({
       ...github.context.repo,
