@@ -37,7 +37,7 @@ jobs:
         run: |
           npm install
       - name: Run Jest Tests
-        uses: landon-martin/code-coverage-commenter@v0.0.9
+        uses: landon-martin/code-coverage-commenter@v0.0.10
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           coverage-command: "npm run test -- --coverage"
