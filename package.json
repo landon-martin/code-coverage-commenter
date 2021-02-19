@@ -2,7 +2,7 @@
   "name": "code-coverage-commenter",
   "version": "0.0.9",
   "description": "Comments on a PR with a formatted markdown table displaying the code coverage",
-  "main": "ccc.js",
+  "main": "src/index.js",
   "author": "Landon Martin",
   "repository": {
     "type": "git"
@@ -22,7 +22,7 @@
   "dependencies": {
     "@actions/core": "^1.2.3",
     "@actions/exec": "^1.0.3",
-    "@actions/github": "^1.1.0",
+    "@actions/github": "^4.0.0",
     "jest": "^25.1.0"
   },
   "devDependencies": {
