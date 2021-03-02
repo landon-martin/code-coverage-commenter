@@ -1,4 +1,6 @@
 # landon-martin/code-coverage-commenter
+## DEPRECATED By https://github.com/Bluescape/code-coverage-action
+
 This GitHub Action runs unit tests and comments on the PR with a markdown table of the code coverage.
 
 ## Currently Supported Test Tools
